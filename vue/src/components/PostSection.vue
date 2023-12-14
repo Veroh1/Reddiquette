@@ -62,8 +62,7 @@
 
 import VoteService from '../services/VoteService';
 import CommentService from '../services/CommentService';
-import Comment from '../components/Comment.vue'
-// import {storeKey } from 'vuex';
+import Comment from '../components/Comment.vue';
 
 export default {
   props: ["post", "reply"],
@@ -159,7 +158,7 @@ export default {
             TargetID: this.$route.params.id,
             Increment: 1
           }
-          const response = await VoteService.UpdatePostVote(vote)
+          const response = await VoteService.UpdatePostVote(vote.TargetID,vote)
           if (response.status >= 200 && response.status < 300) {
             this.updateVotes();
             this.isDownvoted = false;
@@ -197,7 +196,7 @@ export default {
             TargetID: this.$route.params.id,
             Increment: -1
           }
-          const response = await VoteService.UpdatePostVote(vote)
+          const response = await VoteService.UpdatePostVote(vote.TargetID,vote)
           if (response.status >= 200 && response.status < 300) {
             this.updateVotes();
             this.isDownvoted = true;

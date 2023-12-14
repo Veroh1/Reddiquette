@@ -5,7 +5,7 @@
       
 
       <v-list-item class="pt-6">
-          <h3>Active Forums</h3>
+          <h3>Browse Forums</h3>
       </v-list-item>
       <hr style="border-top: 1px solid #ff4500">      <v-list>
         <v-list-item

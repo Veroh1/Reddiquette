@@ -19,8 +19,6 @@
         Home
       </v-btn>
      
-      
-      <router-link v-bind:to="{ name: 'home' }">Home</router-link>
       <v-list-item :prepend-avatar="displayAvatar">
         <v-list-item-content>
           <v-list-item-title>{{ displayedUsername }}</v-list-item-title>
