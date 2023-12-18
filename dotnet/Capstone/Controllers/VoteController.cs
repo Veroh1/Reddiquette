@@ -64,27 +64,49 @@ namespace Capstone.Controllers
         }
 
         [HttpGet("/vote/post/{postId}/user/{userId}")]
-        public Vote GetPostVoteByID(int postId, int userId)
+        public IActionResult GetPostVoteByID(int postId, int userId)
         {
-            var voteHistory = votesDao.GetPostVoteById(postId, userId);
-            return voteHistory;
+            try
+            {
+                var voteHistory = votesDao.GetPostVoteById(postId, userId);
+                return Ok(voteHistory);
+            }
+            catch (DaoException e)
+            {
+                return StatusCode(500, $"Failed to retrieve vote history: {e.Message}");
+            }
         }
 
         [HttpGet("/vote/comment/{commentId}/user/{userId}")]
-        public Vote GetCommentVoteByID(int userId, int commentId)
+        public IActionResult GetCommentVoteByID(int userId, int commentId)
         {
-            var voteHistory = votesDao.GetCommentVoteById(userId, commentId);
-            return voteHistory;
+            try
+            {
+                var voteHistory = votesDao.GetCommentVoteById(userId, commentId);
+                return Ok(voteHistory);
+            }
+            catch (DaoException e)
+            {
+                return StatusCode(500, $"Failed to retrieve vote history: {e.Message}");
+            }
         }
 
         [HttpPost("/vote/post")]
-        public Vote CreatePostVote(Vote vote)
+        public IActionResult CreatePostVote(Vote vote)
         {
-            var userId = vote.UserID;
-            var targetID = vote.TargetID;
-            var increment = vote.Increment;
-            var createdVote = votesDao.CreatePostVote(userId, targetID, increment);
-            return createdVote;
+            try
+            {
+                var userId = vote.UserID;
+                var targetID = vote.TargetID;
+                var increment = vote.Increment;
+                var createdVote = votesDao.CreatePostVote(userId, targetID, increment);
+                return Ok(createdVote);
+            }
+            catch (DaoException e)
+            {
+                return StatusCode(500, $"Failed to create vote: {e.Message}");
+            }
+            
         }
 
         [HttpPost("/vote/comment")]
@@ -98,23 +120,38 @@ namespace Capstone.Controllers
         }
 
         [HttpPut("/vote/comment/{targetID}")]
-        public Vote UpdateCommentVote(Vote vote)
+        public IActionResult UpdateCommentVote(Vote vote)
         {
-            var userId = vote.UserID;
-            var targetID = vote.TargetID;
-            var increment = vote.Increment;
-            var updatedVote = votesDao.UpdateCommentVote(userId,targetID, increment);
-            return updatedVote;
+            try
+            {
+                var userId = vote.UserID;
+                var targetID = vote.TargetID;
+                var increment = vote.Increment;
+                var updatedVote = votesDao.UpdateCommentVote(userId, targetID, increment);
+                return Ok(updatedVote);
+            }
+            catch (DaoException e)
+            {
+                return StatusCode(500, $"Failed to update vote: {e.Message}");
+            }
+
         }
 
         [HttpPut("/vote/post/{targetID}")]
-        public Vote UpdatePostVote(Vote vote)
+        public IActionResult UpdatePostVote(Vote vote)
         {
-            var userId = vote.UserID;
-            var targetID = vote.TargetID;
-            var increment = vote.Increment;
-            var updatedVote = votesDao.UpdatePostVote(userId, targetID, increment);
-            return updatedVote;
+            try
+            {
+                var userId = vote.UserID;
+                var targetID = vote.TargetID;
+                var increment = vote.Increment;
+                var updatedVote = votesDao.UpdatePostVote(userId, targetID, increment);
+                return Ok(updatedVote);
+            }
+            catch (DaoException e)
+            {
+                return StatusCode(500, $"Failed to update vote: {e.Message}");
+            }
         }
 
         [HttpDelete("/vote/post/{targetID}/user/{userID}")]

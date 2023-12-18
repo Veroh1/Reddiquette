@@ -223,7 +223,7 @@ namespace Capstone.DAO
             Vote vote = null;
             string query = "UPDATE comment_votes " +
                         "SET inc = @Inc " +
-                        "WHERE comment_id = @commentId AND user_id = @userId";
+                        "WHERE target_id = @commentId AND user_id = @userId";
 
             try
             {
@@ -257,7 +257,7 @@ namespace Capstone.DAO
             Vote vote = null;
             string query = "UPDATE post_votes " +
                         "SET inc = @Inc " +
-                        "WHERE post_id = @posttId AND user_id = @userId";
+                        "WHERE comment_id = @posttId AND user_id = @userId";
 
             try
             {
