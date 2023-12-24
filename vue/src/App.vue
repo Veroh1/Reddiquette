@@ -24,7 +24,7 @@
       class="mx-5 px-3"
       :prepend-icon="displayAvatar"
     >
-        <v-avatar>
+        <v-avatar size="small" >
           <img :src="displayAvatar">
         </v-avatar>
         <v-spacer></v-spacer>

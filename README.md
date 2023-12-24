@@ -1,5 +1,5 @@
-# Final Capstone
+# Reddiquette - Tech Elevator Capstone
 
-This directory contains all of the starter projects for the final capstone. The Vue starter project works with both the Java and .NET backend projects with a single configuration update that you can read about in the README.
+The origins of this project are in my coding bootcamp capstone. 
 
-Each project contains instructions that provides information about the starting code and explains how to get started with the final capstone project.
+12/24/23 - Over the next few weeks I'll be removing TE placed instructions and verbage.
