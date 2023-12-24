@@ -1,6 +1,6 @@
 <template>
   <v-content class="section">
-    <v-sheet class="citation" >
+    <v-sheet class="citation">
       <v-text class="text-h4">{{ getForumTitle }}</v-text>
       <v-row dense class="mx-auto">
         <v-col md="4">
@@ -11,7 +11,7 @@
         </v-col>
         <v-col md="4">
           <div class="my-4 text-subtitle-2">Accumulated Clout: {{ getClout }}</div>
-        
+
         </v-col>
       </v-row>
     </v-sheet>
@@ -25,7 +25,8 @@
           </div>
         </div>
         <div class="comments-section">
-          <v-textarea v-model="comment.commentContent" color="#FF4500" label="Post content" class="post-content"></v-textarea>
+          <v-textarea v-model="comment.commentContent" color="#FF4500" label="Post content"
+            class="post-content"></v-textarea>
           <v-chip-group class="ma-2">
             <v-chip class="green" label size="small" @click="upVote">
               <i class="fa-solid fa-up-long pr-2"></i>{{ this.storedUpvotes }} Upvotes
@@ -48,7 +49,7 @@
         </v-snackbar>
       </v-container>
       <div v-if="comments" class="comments">
-        <Comment  v-for="(comment, index) in comments" :key="index" :comment="comment" />
+        <Comment v-for="(comment, index) in comments" :key="index" :comment="comment" />
       </div>
     </v-card>
     <!-- <v-divider :thickness="4" color="info"></v-divider> -->
@@ -97,6 +98,8 @@ export default {
   methods: {
     async createComment() {
       try {
+        //TODO: Fix it so that the api path pulls the username when it grabs a comment
+        // currently it's just refrencing a hardcoding in the store.
         this.comment.forumID = this.posts.id;
         this.comment.UserId = this.$store.state.user.userId;
 
@@ -234,7 +237,7 @@ export default {
       else if (Math.round(differenceInTime / (60 * 60 * 24)) == 1) { return "1 day ago" }
       else if (Math.round(differenceInTime / (60 * 60 * 24) < 30)) { return `${Math.round(differenceInTime / (60 * 60 * 24))} days ago` }
       else if (Math.round(differenceInTime / (60 * 60 * 24 * 30) == 1)) { return "1 month ago" }
-      else if (Math.round(differenceInTime / (60 * 60 * 24 * 30) < 12)) { return `${Math.round(differenceInTime / (60 * 60 * 24 * 30))} months ago` }
+      else if (Math.round(differenceInTime / (60 * 60 * 24* 365) < 12)) { return `${Math.round(differenceInTime / (60 * 60 * 24 * 30))} months ago` }
       else if (Math.round(differenceInTime / (60 * 60 * 24 * 365) == 1)) { return "1 year ago" }
       else return `${Math.round(differenceInTime / (60 * 60 * 24 * 365))} years ago`
     },

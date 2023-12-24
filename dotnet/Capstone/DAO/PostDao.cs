@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using Capstone.Models;
 using Capstone.Exceptions;
+using Microsoft.Extensions.Hosting;
 
 namespace Capstone.DAO
 {
@@ -44,16 +45,7 @@ namespace Capstone.DAO
                     SqlDataReader reader = cmd.ExecuteReader();
                     if (reader.Read())
                     {
-                        post = new Post
-                        {
-                            PostID = Convert.ToInt32(reader["post_id"]),
-                            UserID = Convert.ToInt32(reader["user_id"]),
-                            PostContent = reader["post_content"].ToString(),
-                            DateCreated = Convert.ToDateTime(reader["date_created"]),
-                            ForumId = Convert.ToInt32(reader["forum_id"]),
-                            PostTitle = reader["post_title"].ToString(),
-                            ImagePath = reader["post_imgurl"].ToString()
-                        };
+                        post = MapRowToPost(reader);
                     }
                 }
             }
@@ -86,16 +78,7 @@ namespace Capstone.DAO
 
                     while (reader.Read())
                     {
-                        Post post = new Post
-                        {
-                            PostID = Convert.ToInt32(reader["post_id"]),
-                            UserID = Convert.ToInt32(reader["user_id"]),
-                            PostContent = reader["post_content"].ToString(),
-                            DateCreated = Convert.ToDateTime(reader["date_created"]),
-                            ForumId = Convert.ToInt32(reader["forum_id"]),
-                            PostTitle = reader["post_title"].ToString(),
-                            ImagePath = reader["post_imgurl"].ToString()
-                        };
+                        Post post = MapRowToPost(reader);
 
                         postList.Add(post);
                     }
@@ -135,16 +118,7 @@ namespace Capstone.DAO
 
                     while (reader.Read())
                     {
-                        Post post = new Post
-                        {
-                            PostID = Convert.ToInt32(reader["post_id"]),
-                            UserID = Convert.ToInt32(reader["user_id"]),
-                            PostContent = reader["post_content"].ToString(),
-                            DateCreated = Convert.ToDateTime(reader["date_created"]),
-                            ForumId = Convert.ToInt32(reader["forum_id"]),
-                            PostTitle = reader["post_title"].ToString(),
-                            ImagePath = reader["post_imgurl"].ToString()
-                        };
+                        Post post = MapRowToPost(reader);
 
                         postList.Add(post);
                     }
@@ -300,6 +274,22 @@ namespace Capstone.DAO
                     Console.WriteLine($"Deletion skipped for {tableName} as there were no matching rows.");
                 }
             }
+        }
+
+        private Post MapRowToPost(SqlDataReader reader)
+        {
+            Post post = new Post();
+
+
+            post.PostID = Convert.ToInt32(reader["post_id"]);
+            post.UserID = Convert.ToInt32(reader["user_id"]);
+            post.PostContent = reader["post_content"].ToString();
+            post.DateCreated = Convert.ToDateTime(reader["date_created"]);
+            post.ForumId = Convert.ToInt32(reader["forum_id"]);
+            post.PostTitle = reader["post_title"].ToString();
+            post.ImagePath = reader["post_imgurl"].ToString();
+
+            return post;
         }
     }
 }

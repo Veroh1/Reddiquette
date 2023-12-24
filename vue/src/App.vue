@@ -15,11 +15,38 @@
       
       <create-post-input />
       <v-spacer></v-spacer>
-      <v-btn href="/">
+      <v-btn href="/" class="mx-5 px-3">
         Home
       </v-btn>
-     
-      <v-list-item :prepend-avatar="displayAvatar">
+      <v-btn
+      v-if="isLoggedIn"
+      color="primary"
+      class="mx-5 px-3"
+      :prepend-icon="displayAvatar"
+    >
+        <v-avatar>
+          <img :src="displayAvatar">
+        </v-avatar>
+        <v-spacer></v-spacer>
+        <v-list-item>{{ displayedUsername }}</v-list-item>
+      
+
+      <v-menu activator="parent">
+        <v-list>
+          <v-list-item><router-link to="/MyProfile">My Profile</router-link></v-list-item>
+          <v-list-item>New Forum</v-list-item>
+          <v-list-item>Settings</v-list-item>
+          <v-list-item><router-link to="/logout">Log Out</router-link></v-list-item>
+        </v-list>
+      </v-menu>
+    </v-btn>
+    <v-btn
+    v-else
+    >
+    <router-link to="/login" >Log in</router-link>
+    </v-btn>
+
+      <!-- <v-list-item :prepend-avatar="displayAvatar">
         <v-list-item-content>
           <v-list-item-title>{{ displayedUsername }}</v-list-item-title>
           <v-list-item-subtitle>
@@ -27,7 +54,7 @@
             <router-link v-else to="/login" class="text-subtitle-2">Log in</router-link>
           </v-list-item-subtitle>
         </v-list-item-content>
-      </v-list-item>
+      </v-list-item> -->
     </v-app-bar>
 
     <router-view />
@@ -39,6 +66,7 @@ import ForumService from '../src/services/ForumService';
 import PostService from '../src/services/PostService';
 import CommentService from '../src/services/CommentService';
 import CreatePostInput from '../src/components/CreatePostInput.vue'
+import { VBtn } from 'vuetify/lib/components/index.mjs';
 
 export default {
   created() {
@@ -60,7 +88,7 @@ export default {
     // document.body.appendChild(script);
   }, 
   name: 'App',
-  components: {CreatePostInput},
+  components: { CreatePostInput, VBtn },
   data() {
     return {
 

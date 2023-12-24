@@ -15,17 +15,15 @@ namespace Capstone.Controllers
     public class ForumController : ControllerBase
     {
         private readonly IForumDao forumDao;
-        private readonly IMapper mapper;
 
         // Initializes a new instance of the ForumController class.
         //
         // Parameters:
         //   forumDao: The IForumDao instance used to access forum data.
         //   mapper: The IMapper instance used for object mapping.
-        public ForumController(IForumDao forumDao, IMapper mapper)
+        public ForumController(IForumDao forumDao)
         {
             this.forumDao = forumDao;
-            this.mapper = mapper;
         }
 
         // Retrieves all forums and returns them as a list of ForumDto objects.
@@ -35,9 +33,8 @@ namespace Capstone.Controllers
             try
             {
                 var forums = forumDao.GetAllForums();
-                var forumDtos = mapper.Map<List<ForumDto>>(forums);
 
-                return Ok(forumDtos);
+                return Ok(forums);
 
             }
             catch (DaoException e)
@@ -64,9 +61,8 @@ namespace Capstone.Controllers
                 {
                     return NotFound($"No forum found with ID {id}.");
                 }
-                var forumDto = mapper.Map<ForumDto>(forum);
                 
-                return Ok(forumDto);
+                return Ok(forum);
             }
             catch (DaoException e)
             {

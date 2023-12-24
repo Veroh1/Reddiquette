@@ -17,17 +17,15 @@ namespace Capstone.Controllers
     public class CommentController : ControllerBase
     {
         private readonly ICommentDao commentDao;
-        private readonly IMapper mapper;
 
         // Initializes a new instance of the CommentController class.
         // 
         // Parameters:
         //   commentDao: The ICommentDao object used to interact with the comment data.
         //   mapper: The IMapper object used for object mapping.
-        public CommentController(ICommentDao commentDao, IMapper mapper)
+        public CommentController(ICommentDao commentDao)
         {
             this.commentDao = commentDao;
-            this.mapper = mapper;
         }
 
         // Retrieves all comments and returns them as a list of CommentDto objects.
@@ -37,9 +35,8 @@ namespace Capstone.Controllers
             try
             {
                 var comments = commentDao.GetAllComments();
-                var commentDtos = mapper.Map<List<Comment>>(comments);
 
-                return Ok(commentDtos);
+                return Ok(comments);
             }
             catch (DaoException e)
             {
@@ -63,9 +60,8 @@ namespace Capstone.Controllers
                 {
                     return NotFound($"No comment found with ID {id}.");
                 }
-                var commentDto = mapper.Map<Comment>(comment);
 
-                return Ok(commentDto);
+                return Ok(comment);
             }
             catch (DaoException e)
             {
@@ -83,9 +79,8 @@ namespace Capstone.Controllers
                 {
                     return NotFound($"No comments found with Post ID {id}.");
                 }
-                var commentDtos = mapper.Map<List<Comment>>(comments);
 
-                return Ok(commentDtos);
+                return Ok(comments);
             }
             catch (DaoException e)
             {

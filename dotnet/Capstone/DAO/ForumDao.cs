@@ -44,14 +44,7 @@ namespace Capstone.DAO
                     SqlDataReader reader = cmd.ExecuteReader();
                     if (reader.Read())
                     {
-                        forum = new Forum
-                        {
-                            ForumId = Convert.ToInt32(reader["forum_id"]),
-                            ForumTitle = reader["forum_title"].ToString(),
-                            ForumDescription = reader["forum_description"].ToString(),
-                            ImagePath = reader["image_path"].ToString(),
-                            DateCreated = Convert.ToDateTime(reader["date_created"])
-                        };
+                        forum = MapRowToForum(reader);
                     }
                 }
             }
@@ -82,14 +75,7 @@ namespace Capstone.DAO
 
                     while (reader.Read())
                     {
-                        Forum forum = new Forum
-                        {
-                            ForumId = Convert.ToInt32(reader["forum_id"]),
-                            ForumTitle = reader["forum_title"].ToString(),
-                            ForumDescription = reader["forum_description"].ToString(),
-                            ImagePath = reader["image_path"].ToString(),
-                            DateCreated = Convert.ToDateTime(reader["date_created"])
-                        };
+                        Forum forum = MapRowToForum(reader);
 
                         forumList.Add(forum);
                     }
@@ -234,6 +220,19 @@ namespace Capstone.DAO
                     Console.WriteLine($"Deletion skipped for {tableName} as there were no matching rows.");
                 }
             }
+        }
+
+        private Forum MapRowToForum(SqlDataReader reader)
+        {
+            Forum forum = new Forum();
+
+            forum.ForumId = Convert.ToInt32(reader["forum_id"]);
+            forum.ForumTitle = reader["forum_title"].ToString();
+            forum.ForumDescription = reader["forum_description"].ToString();
+            forum.ImagePath = reader["image_path"].ToString();
+            forum.DateCreated = Convert.ToDateTime(reader["date_created"]);
+
+            return forum;
         }
     }
 }

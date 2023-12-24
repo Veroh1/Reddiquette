@@ -15,17 +15,15 @@ namespace Capstone.Controllers
     public class PostController : ControllerBase
     {
         private readonly IPostDao postDao;
-        private readonly IMapper mapper;
 
         // Initializes a new instance of the PostController class.
         // 
         // Parameters:
         //   postDao: The IPostDao object used to interact with the post data.
         //   mapper: The IMapper object used for object mapping.
-        public PostController(IPostDao postDao, IMapper mapper)
+        public PostController(IPostDao postDao)
         {
             this.postDao = postDao;
-            this.mapper = mapper;
         }
 
         // Retrieves all posts and returns them as a list of PostDto objects.
@@ -35,9 +33,8 @@ namespace Capstone.Controllers
             try
             {
                 var posts = postDao.GetAllPosts();
-                var postDtos = mapper.Map<List<Post>>(posts);
 
-                return Ok(postDtos);
+                return Ok(posts);
             }
             catch (DaoException e)
             {
@@ -61,9 +58,8 @@ namespace Capstone.Controllers
                 {
                     return NotFound($"No post found with ID {id}.");
                 }
-                var postDto = mapper.Map<Post>(post);
 
-                return Ok(postDto);
+                return Ok(post);
             }
             catch (DaoException e)
             {
@@ -88,9 +84,8 @@ namespace Capstone.Controllers
                 {
                     return NotFound($"No posts found with Forum ID {id}.");
                 }
-                var postDtos = mapper.Map<List<Post>>(posts);
 
-                return Ok(postDtos);
+                return Ok(posts);
             }
             catch (DaoException e)
             {

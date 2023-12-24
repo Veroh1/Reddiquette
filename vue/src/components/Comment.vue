@@ -1,24 +1,22 @@
 <template>
-    <div>
-        <!-- <div class="text-overline mb-1 forum-title">
-            {{ getForumTitle(comment.forumID) }}
-        </div> -->
-        <div class="text-h6 my-1 post-title">
-            {{ getPostTitle(comment.postID) }}
-        </div>
-        <p class="text-subtitle-2 username">
-            <span class="font-weight-bold">Posted by: </span>
-            {{ getUserName(comment.userID) }}
-        </p>
-        <p class="text-subtitle-2 date-created">
-            <span class="font-weight-bold">Date posted: </span>{{ timePassed }}
-        </p>
-        <v-card value="rounded" color="grey-lighten-3" flat height="50" class="overflow-hidden">
-            <v-card-text>
-                {{ comment.commentContent }}
-            </v-card-text>
-        </v-card>
-    </div>
+    <v-card value="rounded" >
+        <v-card-title class="text-h6 my-1 post-title">
+            <v-sheet color="grey-lighten-1" class="rounded-lg" >
+                <p class="px-3">
+                    {{ getPostTitle(comment.postID) }}
+                </p>
+            </v-sheet>
+        </v-card-title>
+        <v-card-subtitle >Posted by: {{ getUserName(comment.userID) }} | Date Posted: {{ timePassed }} </v-card-subtitle>
+        <v-card-text> 
+            <v-sheet color="grey-lighten-2" class="comment-content rounded-shaped">
+                <p class="px-4">
+                    {{ comment.commentContent }} 
+                </p>
+            </v-sheet>
+        </v-card-text>
+    </v-card>
+    <br>
 </template>
 
 <script>
@@ -83,5 +81,9 @@ export default {
 
 .date-created {
     height: 20px;
+}
+
+.comment-content {
+    min-height: 10%;
 }
 </style>
