@@ -249,7 +249,7 @@ export default {
     getUserName() {
       const userId = this.post.userID;
       const user = this.$store.state.postedUsers.find((user) => user.userId === userId);
-      return user ? user.userName : 'User Name Not Found';
+      return user ? user.username : 'User Name Not Found';
     },
     getUpvotes() {
       return this.storedUpvotes;

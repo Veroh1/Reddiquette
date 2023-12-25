@@ -12,5 +12,7 @@ namespace Capstone.DAO
         User GetUserByUsername(string username, string userEmail);
 
         User CreateUser(string username, string password, string role, string userEmail);
+
+        List<ListedUsers> GetAllListedUsers();
     }
 }

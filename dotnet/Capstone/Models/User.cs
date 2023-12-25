@@ -23,6 +23,12 @@
         public string Avatar { get; set; }
     }
 
+    public class ListedUsers
+    {
+        public int UserId { get; set; }
+        public string Username { get; set; }
+    }
+
     /// <summary>
     /// Model to return upon successful login (user data + token)
     /// </summary>

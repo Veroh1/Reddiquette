@@ -15,26 +15,7 @@ export function createStore(currentToken, currentUser, currentForum) {
       token: currentToken || '',
       user: currentUser || {},
       isAuthenticated: !!currentToken,
-      postedUsers: [{
-        userId: 1,
-        userName: 'Jenny'
-      },
-      {
-        userId: 2,
-        userName: 'John'
-      },
-      {
-        userId: 3,
-        userName: 'Omar'
-      },
-      {
-        userId: 4,
-        userName: 'Mac'
-      },
-      {
-        userId: 5,
-        userName: 'Wayne'
-      }]
+      postedUsers: [],
     },
     mutations: {
       SET_AUTH_TOKEN(state, token) {
@@ -63,17 +44,14 @@ export function createStore(currentToken, currentUser, currentForum) {
       },
       SET_COMMENTS(state, comments) {
         state.comments = comments;
+      },
+      SET_USERS(state, listedUsers) {
+        state.postedUsers = listedUsers;
       }
 
     },
 
     actions: {
-      upVotePost({ commit }, postId) {
-        commit('UPVOTE_POST', postId);
-      },
-      downVotePost({ commit }, postId) {
-        commit('DOWNVOTE_POST', postId);
-      },
       async login({ commit }, user) {
         try {
           const response = await AuthService.login(user);

@@ -67,6 +67,7 @@ import PostService from '../src/services/PostService';
 import CommentService from '../src/services/CommentService';
 import CreatePostInput from '../src/components/CreatePostInput.vue'
 import { VBtn } from 'vuetify/lib/components/index.mjs';
+import AuthService from './services/AuthService';
 
 export default {
   created() {
@@ -82,6 +83,9 @@ export default {
     this.$store.commit("SET_COMMENTS", response.data);
     }  
     );
+    AuthService.getUsers().then( response => {
+      this.$store.commit("SET_USERS", response.data);
+    })
     // const script = document.createElement('script');
     // script.src = 'https://s3-us-west-2.amazonaws.com/kaboodle/kaboodle.js';
     // script.type = 'text/javascript';

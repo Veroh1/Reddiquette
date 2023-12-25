@@ -91,7 +91,7 @@ namespace Capstone.DAO
 
             return postList;
         }
-        
+
         // Retrieves a list of posts based on the specified forum ID.
         // 
         // Parameters:
@@ -291,5 +291,7 @@ namespace Capstone.DAO
 
             return post;
         }
+
+
     }
 }

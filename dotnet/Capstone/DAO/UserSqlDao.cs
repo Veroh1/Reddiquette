@@ -139,6 +139,36 @@ namespace Capstone.DAO
             return user;
         }
 
+        public List<ListedUsers> GetAllListedUsers()
+        {
+            List<ListedUsers> userlist = new List<ListedUsers>();
+            string query = "SELECT user_id, username FROM users;";
+
+            try
+            {
+                using (var conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    var cmd = new SqlCommand(query, conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        ListedUsers user = MapRowToListedUser(reader);
+                        userlist.Add(user);
+
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                throw new DaoException("SQL exception occurred", e);
+            }
+
+            return userlist;
+
+        }
+
         public User CreateUser(string username, string password, string role, string userEmail)
         {
             User newUser = null;
@@ -187,6 +217,16 @@ namespace Capstone.DAO
             user.Role = Convert.ToString(reader["user_role"]);
             user.Email = Convert.ToString(reader["user_email"]);
             user.Avatar = Convert.ToString(reader["avatar"]);
+            return user;
+        }
+
+        private ListedUsers MapRowToListedUser(SqlDataReader reader)
+        {
+            ListedUsers user = new ListedUsers();
+
+            user.Username = reader["username"].ToString();
+            user.UserId = Convert.ToInt32(reader["user_id"]);
+
             return user;
         }
     }

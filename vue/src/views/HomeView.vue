@@ -31,8 +31,6 @@
     <side-bar />
 </template>
 
-
-
 <script>
 import SmallPost from '../components/SmallPost.vue'
 import SideBar from '../components/SideBar.vue'

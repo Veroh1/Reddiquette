@@ -3,6 +3,7 @@ using Capstone.DAO;
 using Capstone.Exceptions;
 using Capstone.Models;
 using Capstone.Security;
+using Capstone.DTO;
 
 namespace Capstone.Controllers
 {
@@ -53,6 +54,24 @@ namespace Capstone.Controllers
             }
 
             return result;
+        }
+
+        [HttpGet("/users")]
+        public IActionResult GetListedUsers()
+        {
+            try
+            {
+                var users = userDao.GetAllListedUsers();
+                if (users == null)
+                {
+                    return NotFound($"No registered users found.");
+                }
+                return Ok(users);
+            }
+            catch (DaoException e)
+            {
+                return StatusCode(500, $"Failed to retrieve registered users: {e.Message}");
+            }
         }
 
         [HttpPost("/register")]
