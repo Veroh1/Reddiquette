@@ -1,17 +1,19 @@
 <template>
     <v-main>
-        <my-profile-section />
+        <profile-info-section />
     </v-main>
-    <side-bar />
+    <v-sheet>
+        <side-bar />
+    </v-sheet>
 </template>
 
 <script>
-import MyProfileSection from '../components/MyProfileSection.vue';
+import ProfileInfoSection from '../components/ProfileInfoSection.vue';
 import SideBar from '../components/SideBar.vue';
 
 export default {
     components: {
-        MyProfileSection,
+        ProfileInfoSection,
         SideBar,
     }
 }
